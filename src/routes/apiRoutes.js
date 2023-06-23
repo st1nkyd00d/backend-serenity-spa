@@ -2,6 +2,7 @@ const express = require('express');
 const { getServices, createServices, updateServices, deleteServices } = require('../controllers/servicesController');
 const { getPromos, createPromos, updatePromos, deletePromos } = require('../controllers/promosController');
 const { getTestimonies, createTestimonies, updateTestimonies, deleteTestimonies } = require('../controllers/testimoniesController');
+const { saveFormData } = require('../controllers/formController');
 const router = express.Router();
 
 // Rutas para servicios
@@ -44,5 +45,9 @@ router.put('/:id/actualizarTestimonio', updateTestimonies)
 // Borrar una promo
 router.delete('/:id/borrarTestimonio', deleteTestimonies)
 
+// Ruta para guardar datos del formulario
+// Guardando los datos...
+
+router.post('/guardarFormulario', saveFormData)
 
 module.exports = router;

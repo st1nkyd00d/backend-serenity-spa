@@ -24,7 +24,6 @@ const createPromos = async (req, res) => {
         console.log(error)
         res.status(500).json({ error: 'Ocurrió un error al intentar crear la promoción.' });
     }
-
 }
 
 const updatePromos = async (req, res) => {
