@@ -5,6 +5,7 @@ const getServices = async (req, res) => {
         const service = await Services.find({});
         res.status(200).json(service);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Ocurrió un error al obtener los servicios.' });
     }
 };
@@ -20,6 +21,7 @@ const createServices = async (req, res) => {
         })
         res.status(201).json(`El servicio con los datos ${service} ha sido creado correctamente.`);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Ocurrió un error al intentar crear el servicio.' });
     }
 
