@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb+srv://SerenitySPADBMaster:qcIzRaUy3x8r7Hp2@cluster0.qtcmtta.mongodb.net/serenity_db?retryWrites=true&w=majority'
+const URI = process.env.URI
 
 const connectDb = async () => {
     try {

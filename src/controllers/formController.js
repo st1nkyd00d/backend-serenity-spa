@@ -15,7 +15,7 @@ const saveFormData = async (req, res) => {
             from: '"Serenity Spa ⭐" <SerenitySpaNoReply@gmail.com>', 
             to: email, 
             subject: "¡Gracias por hacer tu reserva en Serenity Spa!", 
-            html: "<b> Hemos recibido tu reserva en Serenity Spa. Un miembro de nuestro equipo se pondrá en contacto contigo tan pronto como sea posible para verificar si existe disponibilidad para el día ${date} por la ${time}. ¡Agradecemos tu interés por reservar en Serenity Spa! </b>", 
+            html: `<b> Hemos recibido tu reserva en Serenity Spa. Un miembro de nuestro equipo se pondrá en contacto contigo tan pronto como sea posible para verificar si existe disponibilidad para el día ${date} por la ${time}. ¡Agradecemos tu interés por reservar en Serenity Spa! </b>`, 
         });
 
         res.status(201).json('Se han guardado los datos del formulario en la base de datos.');
