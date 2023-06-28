@@ -7,29 +7,31 @@ const registerAdmin = async (req, res) => {
     try {
         const { username, password } = req.body;
         if (!username || !password) {
-            return res.status(400).json({ error: 'El usuario y la contraseña son requeridos' });
+            return res.status(400).json({ error: 'El usuario y la contraseña son requeridos' });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const admin = await Admins.create({
             username,
             password: hashedPassword
-        })
-        res.status(201).json(`El admin con los datos: ${admin} ha sido creado correctamente.`);
+        });
+        let token = createToken({ id: admin._id, username: admin.username });
+        res.status(200).json({ token, username });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         if (error.code === 11000) {
             return res.status(400).json({ error: 'El usuario ya existe. Por favor escoja otro' });
         }
         res.status(500).json({ error: 'Ocurrió un error al intentar crear un nuevo admin.' });
     }
-}
+};
+
 
 
 const loginAdmin = async (req, res) => {
     try {
         const { username, password } = req.body;
         if (!username || !password) {
-            return res.status(400).json({ error: 'El usuario y la contraseña son requeridos para iniciar sesion' });
+            return res.status(400).json({ error: 'El usuario y la contraseña son requeridos para iniciar sesión' });
         }
         const admin = await Admins.findOne({ username });
         if (!admin) {
@@ -37,14 +39,15 @@ const loginAdmin = async (req, res) => {
         }
         const isPasswordValid = await bcrypt.compare(password, admin.password);
         if (!isPasswordValid) {
-            return res.status(400).json({ error: 'La contraseña es incorrecta' });
+            return res.status(400).json({ error: 'La contraseña es incorrecta' });
         }
         let token = createToken({ id: admin._id, username: admin.username });
-        res.status(200).json(token);
+        res.status(200).json({ token, username }); 
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: 'Ocurrió un error al intentar iniciar sesion.' });
+        console.log(error);
+        res.status(500).json({ error: 'Ocurrió un error al intentar iniciar sesión.' });
     }
-}
+};
+
 
 module.exports = { registerAdmin, loginAdmin };

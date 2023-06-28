@@ -4,6 +4,7 @@ const { getPromos, createPromos, updatePromos, deletePromos } = require('../cont
 const { getTestimonies, createTestimonies, updateTestimonies, deleteTestimonies } = require('../controllers/testimoniesController');
 const { saveFormData } = require('../controllers/formController');
 const validateToken = require('../controllers/jwtAuthController');
+const { getTips, createTips, updateTips, deleteTips } = require('../controllers/tipsController');
 const router = express.Router();
 
 // Rutas para servicios
@@ -45,6 +46,20 @@ router.put('/:id/actualizarTestimonio', validateToken, updateTestimonies)
 
 // Borrar una promo
 router.delete('/:id/borrarTestimonio', validateToken, deleteTestimonies)
+
+//Rutas para tips
+//Obtener todas los tips
+router.get('/obtenerTips', getTips)
+
+// Crear un tip
+router.post('/crearTip', validateToken, createTips)
+
+// Actualizar un tip
+router.put('/:id/actualizarTip', validateToken, updateTips)
+
+// Borrar un tip
+router.delete('/:id/borrarTip', validateToken, deleteTips)
+
 
 // Ruta para guardar datos del formulario
 // Guardando los datos...
